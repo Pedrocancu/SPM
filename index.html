@@ -1,78 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Acceso al Sistema</title>
 
-	<!-- Normalize V8.0.1 -->
-	<link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+    <script src="./js/sweetalert2.min.js" ></script>
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="./css/style.css">
 
-	<!-- Bootstrap V4.3 -->
-	<link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        /* Estilo del cuerpo con un fondo sutil y moderno */
+        body {
+            background: #f0f2f5; /* Gris muy claro para descanso visual */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
 
-	<!-- Bootstrap Material Design V4.0 -->
-	<link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+        /* Contenedor de login con bordes suaves y sombra profunda */
+        .login-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            border-top: 5px solid #3f51b5; /* Línea de acento superior (Indigo) */
+        }
 
-	<!-- Font Awesome V5.9.0 -->
-	<link rel="stylesheet" href="./css/all.css">
+        /* Estilo para el icono superior */
+        .login-content i.fa-user-circle {
+            color: #3f51b5;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
 
-	<!-- Sweet Alerts V8.13.0 CSS file -->
-	<link rel="stylesheet" href="./css/sweetalert2.min.css">
+        /* Texto de bienvenida */
+        .welcome-text {
+            color: #444;
+            font-weight: 500;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
 
-	<!-- Sweet Alert V8.13.0 JS file -->
-	<script src="./js/sweetalert2.min.js" ></script>
+        .subtitle-text {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
 
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-	
-	<!-- General Styles -->
-	<link rel="stylesheet" href="./css/style.css">
+        /* Mejora visual de los campos de texto */
+        .form-group {
+            margin-bottom: 25px !important;
+        }
+
+        .form-control {
+            border-bottom: 2px solid #ddd !important;
+        }
+
+        /* Botón personalizado con efecto de elevación */
+        .btn-custom-login {
+            background-color: #3f51b5 !important;
+            color: #fff !important;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: block;
+            text-decoration: none !important;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(63, 81, 181, 0.2);
+        }
+
+        .btn-custom-login:hover {
+            background-color: #303f9f !important;
+            box-shadow: 0 6px 12px rgba(63, 81, 181, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Pie de página del login */
+        .login-footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+    </style>
 </head>
 <body>
 
-	<div class="login-container">
-		<div class="login-content">
-			<p class="text-center">
-				<i class="fas fa-user-circle fa-5x"></i>
-			</p>
-			<p class="text-center">
-				Inicia sesión con tu cuenta
-			</p>
-			<form action="">
-				<div class="form-group">
-					<label for="UserName" class="bmd-label-floating"><i class="fas fa-user-secret"></i> &nbsp; Usuario</label>
-					<input type="text" class="form-control" id="UserName" name="usuario" pattern="[a-zA-Z0-9]{1,35}" maxlength="35">
-				</div>
-				<div class="form-group">
-					<label for="UserPassword" class="bmd-label-floating"><i class="fas fa-key"></i> &nbsp; Contraseña</label>
-					<input type="password" class="form-control" id="UserPassword" name="clave" maxlength="200">
-				</div>
-				<a href="home.html" class="btn-login text-center">LOG IN</a>
-			</form>
-		</div>
-	</div>
+    <div class="login-container">
+        <div class="login-content">
+            <p class="text-center">
+                <i class="fas fa-user-circle fa-5x"></i>
+            </p>
+            
+            <p class="text-center welcome-text">Bienvenido</p>
+            <p class="text-center subtitle-text">Ingresa tus credenciales para continuar</p>
+            
+            <form action="" autocomplete="off">
+                <div class="form-group">
+                    <label for="UserName" class="bmd-label-floating">
+                        <i class="fas fa-user"></i> &nbsp; Nombre de usuario
+                    </label>
+                    <input type="text" class="form-control" id="UserName" name="usuario" 
+                           pattern="[a-zA-Z0-9]{1,35}" maxlength="35" required>
+                </div>
 
-	
-	<!--=============================================
-	=            Include JavaScript files           =
-	==============================================-->
-	<!-- jQuery V3.4.1 -->
-	<script src="./js/jquery-3.4.1.min.js" ></script>
+                <div class="form-group">
+                    <label for="UserPassword" class="bmd-label-floating">
+                        <i class="fas fa-key"></i> &nbsp; Contraseña
+                    </label>
+                    <input type="password" class="form-control" id="UserPassword" name="clave" 
+                           maxlength="200" required>
+                </div>
 
-	<!-- popper -->
-	<script src="./js/popper.min.js" ></script>
+                <a href="home.html" class="btn btn-raised btn-custom-login text-center">
+                    Iniciar Sesión
+                </a>
 
-	<!-- Bootstrap V4.3 -->
-	<script src="./js/bootstrap.min.js" ></script>
+                <p class="text-center login-footer">
+                    &copy; 2026 Todos los derechos reservados.
+                </p>
+            </form>
+        </div>
+    </div>
 
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
-
-	<!-- Bootstrap Material Design V4.0 -->
-	<script src="./js/bootstrap-material-design.min.js" ></script>
-	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-
-	<script src="./js/main.js" ></script>
+    <script src="./js/jquery-3.4.1.min.js" ></script>
+    <script src="./js/popper.min.js" ></script>
+    <script src="./js/bootstrap.min.js" ></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
+    <script src="./js/bootstrap-material-design.min.js" ></script>
+    <script>
+        $(document).ready(function() { 
+            // Inicializa los efectos de Material Design
+            $('body').bootstrapMaterialDesign(); 
+        });
+    </script>
+    <script src="./js/main.js" ></script>
 </body>
 </html>

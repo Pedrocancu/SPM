@@ -2,334 +2,263 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Buscar item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador Inteligente - Items</title>
 
-    <!-- Normalize V8.0.1 -->
     <link rel="stylesheet" href="./css/normalize.css">
-
-    <!-- Bootstrap V4.3 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
-
-    <!-- Bootstrap Material Design V4.0 -->
     <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
-
-    <!-- Font Awesome V5.9.0 -->
     <link rel="stylesheet" href="./css/all.css">
-
-    <!-- Sweet Alerts V8.13.0 CSS file -->
     <link rel="stylesheet" href="./css/sweetalert2.min.css">
-
-    <!-- Sweet Alert V8.13.0 JS file-->
     <script src="./js/sweetalert2.min.js"></script>
-
-    <!-- jQuery Custom Content Scroller V3.1.5 -->
     <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
-    <!-- General Styles -->
     <link rel="stylesheet" href="./css/style.css">
 
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --primary-gradient: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            --danger-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            --table-hover: #f1f7ff;
+        }
 
+        /* Estilo general del buscador */
+        .form-neon {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .search-input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-group .form-control {
+            border-radius: 50px !important;
+            padding: 25px 30px !important;
+            font-size: 1.1rem;
+            border: 2px solid #e0e0e0 !important;
+            transition: all 0.3s ease;
+        }
+
+        .search-input-group .form-control:focus {
+            border-color: #00b4db !important;
+            box-shadow: 0 0 15px rgba(0, 180, 219, 0.2) !important;
+        }
+
+        /* Tabla Estilizada */
+        .table-container-modern {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+        }
+
+        .table thead {
+            background: #f8f9fa;
+        }
+
+        .table thead th {
+            border: none;
+            color: #555;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            padding: 15px;
+        }
+
+        .table tbody tr {
+            transition: background 0.2s;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .table tbody tr:hover {
+            background-color: var(--table-hover) !important;
+        }
+
+        .table td {
+            vertical-align: middle !important;
+            padding: 15px !important;
+            color: #444;
+            font-size: 0.95rem;
+        }
+
+        /* Badges de Stock */
+        .stock-badge {
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-weight: bold;
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        /* Botones Pro */
+        .btn-modern {
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-search-pro {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 180, 219, 0.3);
+        }
+
+        .btn-delete-search {
+            background: var(--danger-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            color: white;
+        }
+
+        /* Pagination */
+        .pagination .page-link {
+            border-radius: 10px;
+            margin: 0 3px;
+            border: none;
+            color: #0083b0;
+            font-weight: 600;
+        }
+
+        .pagination .page-item.active .page-link {
+            background: var(--primary-gradient);
+        }
+    </style>
 </head>
 
-
 <body>
-    <!-- Main container -->
     <main class="full-box main-container">
-        <!-- Nav lateral -->
         <section class="full-box nav-lateral">
-            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
-            <div class="full-box nav-lateral-content">
-                <figure class="full-box nav-lateral-avatar">
-                    <i class="far fa-times-circle show-nav-lateral"></i>
-                    <img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
-                    <figcaption class="roboto-medium text-center">
-                        Carlos Alfaro <br><small class="roboto-condensed-light">Web Developer</small>
-                    </figcaption>
-                </figure>
-                <div class="full-box nav-lateral-bar"></div>
-                <nav class="full-box nav-lateral-menu">
-                    <ul>
-                        <li>
-                            <a href="home.html"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Dashboard</a>
-                        </li>
+            </section>
 
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-users fa-fw"></i> &nbsp; Clientes <i class="fas fa-chevron-down"></i></a>
-                            <ul>
-                                <li>
-                                    <a href="client-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Cliente</a>
-                                </li>
-                                <li>
-                                    <a href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a>
-                                </li>
-                                <li>
-                                    <a href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a>
-                                </li>
-                            </ul>
-                        </li>
+        <section class="full-box page-content">
+            <nav class="full-box navbar-info">
+                <a href="#" class="float-left show-nav-lateral"><i class="fas fa-exchange-alt"></i></a>
+                <a href="user-update.html"><i class="fas fa-user-cog"></i></a>
+                <a href="#" class="btn-exit-system"><i class="fas fa-power-off"></i></a>
+            </nav>
 
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
-                            <ul>
-                                <li>
-                                    <a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a>
-                                </li>
-                                <li>
-                                    <a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de items</a>
-                                </li>
-                                <li>
-                                    <a href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar item</a>
-                                </li>
-                            </ul>
-                        </li>
+            <div class="full-box page-header">
+                <h3 class="text-left font-weight-bold">
+                    <i class="fas fa-search-plus fa-fw"></i> &nbsp; BUSCADOR DE INVENTARIO
+                </h3>
+                <p class="text-muted">Localiza cualquier item de forma instantánea filtrando por nombre o código.</p>
+            </div>
 
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Préstamos <i class="fas fa-chevron-down"></i></a>
-                            <ul>
-                                <li>
-                                    <a href="reservation-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo préstamo</a>
-                                </li>
-                                <li>
-                                    <a href="reservation-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de préstamos</a>
-                                </li>
-                                <li>
-                                    <a href="reservation-search.html"><i class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar préstamos</a>
-                                </li>
-                                <li>
-                                    <a href="reservation-pending.html"><i class="fas fa-hand-holding-usd fa-fw"></i> &nbsp; Préstamos pendientes</a>
-                                </li>
-                            </ul>
-                        </li>
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO</a></li>
+                    <li><a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; INVENTARIO</a></li>
+                    <li><a class="active" href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCADOR</a></li>
+                </ul>
+            </div>
+            
+            <div class="container-fluid">
+                <form class="form-neon" action="">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-8">
+                            <div class="form-group search-input-group">
+                                <input type="text" class="form-control text-center" placeholder="Escribe el nombre o código del item..." id="inputSearch">
+                            </div>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-modern btn-search-pro">
+                                <i class="fas fa-search"></i> &nbsp; REALIZAR BÚSQUEDA
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
-                            <ul>
-                                <li>
-                                    <a href="user-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
-                                </li>
-                                <li>
-                                    <a href="user-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
-                                </li>
-                                <li>
-                                    <a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar usuario</a>
-                                </li>
-                            </ul>
-                        </li>
+            <div class="container-fluid">
+                <div class="text-center mb-4">
+                    <p class="lead">Mostrando resultados para: <span class="badge badge-info p-2">"Laptop Dell"</span></p>
+                    <form action="">
+                        <button type="submit" class="btn btn-modern btn-delete-search btn-sm">
+                            <i class="far fa-trash-alt"></i> &nbsp; LIMPIAR FILTROS
+                        </button>
+                    </form>
+                </div>
 
-                        <li>
-                            <a href="company.html"><i class="fas fa-store-alt fa-fw"></i> &nbsp; Empresa</a>
-                        </li>
+                <div class="table-container-modern">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>CÓDIGO</th>
+                                    <th>NOMBRE DEL ITEM</th>
+                                    <th>DISPONIBILIDAD</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td>1</td>
+                                    <td><code class="text-primary font-weight-bold">#001245</code></td>
+                                    <td class="text-left">Laptop Dell Latitude 5420</td>
+                                    <td><span class="stock-badge">24 Unidades</span></td>
+                                    <td>
+                                        <a href="item-update.html" class="btn btn-outline-success btn-sm btn-fab" title="Editar">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-outline-danger btn-sm btn-fab" title="Eliminar">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td>2</td>
+                                    <td><code class="text-primary font-weight-bold">#005689</code></td>
+                                    <td class="text-left">Monitor LG UltraWide 29"</td>
+                                    <td><span class="stock-badge">12 Unidades</span></td>
+                                    <td>
+                                        <a href="item-update.html" class="btn btn-outline-success btn-sm btn-fab">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-outline-danger btn-sm btn-fab">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
                     </ul>
                 </nav>
             </div>
         </section>
-        <section class="full-box page-content">
-            <nav class="full-box navbar-info">
-                <a href="#" class="float-left show-nav-lateral">
-                    <i class="fas fa-exchange-alt"></i>
-                </a>
-                <a href="user-update.html">
-                    <i class="fas fa-user-cog"></i>
-                </a>
-                <a href="#" class="btn-exit-system">
-                    <i class="fas fa-power-off"></i>
-                </a>
-            </nav>
-            <!-- Page header -->
-            <div class="full-box page-header">
-                <h3 class="text-left">
-                    <i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM
-                </h3>
-                <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum delectus eos enim numquam fugit optio accusantium, aperiam eius facere architecto facilis quibusdam asperiores veniam omnis saepe est et, quod obcaecati.
-                </p>
-            </div>
-            <div class="container-fluid">
-                <ul class="full-box list-unstyled page-nav-tabs">
-                    <li>
-                        <a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR ITEM</a>
-                    </li>
-                    <li>
-                        <a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ITEMS</a>
-                    </li>
-                    <li>
-                        <a class="active" href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ITEM</a>
-                    </li>
-                </ul>
-            </div>
-            
-            <!--CONTENT-->
-            <div class="container-fluid">
-                <form class="form-neon" action="">
-                    <div class="container-fluid">
-                        <div class="row justify-content-md-center">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="inputSearch" class="bmd-label-floating">¿Qué item estas buscando?</label>
-                                    <input type="text" class="form-control" name="busqueda-" id="inputSearch" maxlength="30">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center" style="margin-top: 40px;">
-                                    <button type="submit" class="btn btn-raised btn-info"><i class="fas fa-search"></i> &nbsp; BUSCAR</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            
-            <div class="container-fluid">
-                <form action="">
-                    <input type="hidden" name="eliminar-busqueda" value="eliminar">
-                    <div class="container-fluid">
-                        <div class="row justify-content-md-center">
-                            <div class="col-12 col-md-6">
-                                <p class="text-center" style="font-size: 20px;">
-                                    Resultados de la busqueda <strong>“Buscar”</strong>
-                                </p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center" style="margin-top: 20px;">
-                                    <button type="submit" class="btn btn-raised btn-danger"><i class="far fa-trash-alt"></i> &nbsp; ELIMINAR BÚSQUEDA</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-
-           <div class="container-fluid">
-				<div class="table-responsive">
-					<table class="table table-dark table-sm">
-						<thead>
-							<tr class="text-center roboto-medium">
-								<th>#</th>
-								<th>CÓDIGO</th>
-								<th>NOMBRE</th>
-								<th>STOCK</th>
-								<th>ACTUALIZAR</th>
-								<th>ELIMINAR</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="text-center" >
-								<td>1</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL ITEM</td>
-								<td>20</td>
-								<td>
-                                    <a href="item-update.html" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i> 
-                                    </a>
-                                </td>
-                                <td>
-                                    <form action="">
-                                        <button type="button" class="btn btn-warning">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-							</tr>
-							<tr class="text-center" >
-								<td>2</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL ITEM</td>
-								<td>57</td>
-								<td>
-                                    <a href="item-update.html" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i> 
-                                    </a>
-                                </td>
-                                <td>
-                                    <form action="">
-                                        <button type="button" class="btn btn-warning">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-							</tr>
-							<tr class="text-center" >
-								<td>3</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL ITEM</td>
-								<td>81</td>
-								<td>
-                                    <a href="item-update.html" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i> 
-                                    </a>
-                                </td>
-                                <td>
-                                    <form action="">
-                                        <button type="button" class="btn btn-warning">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-							</tr>
-							<tr class="text-center" >
-								<td>4</td>
-								<td>012342567</td>
-								<td>NOMBRE DEL ITEM</td>
-								<td>90</td>
-								<td>
-                                    <a href="item-update.html" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i> 
-                                    </a>
-                                </td>
-                                <td>
-                                    <form action="">
-                                        <button type="button" class="btn btn-warning">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						<li class="page-item disabled">
-							<a class="page-link" href="#" tabindex="-1">Previous</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-        </section>
-
-
     </main>
-    
-    	
-	<!--=============================================
-	=            Include JavaScript files           =
-	==============================================-->
-	<!-- jQuery V3.4.1 -->
-	<script src="./js/jquery-3.4.1.min.js" ></script>
 
-	<!-- popper -->
-	<script src="./js/popper.min.js" ></script>
-
-	<!-- Bootstrap V4.3 -->
-	<script src="./js/bootstrap.min.js" ></script>
-
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
-
-	<!-- Bootstrap Material Design V4.0 -->
-	<script src="./js/bootstrap-material-design.min.js" ></script>
-	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-
-	<script src="./js/main.js" ></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
