@@ -3,151 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Acceso al Sistema</title>
+    <title>SISTEMA POS | Login Pro</title>
 
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
     <link rel="stylesheet" href="./css/all.css">
     <link rel="stylesheet" href="./css/sweetalert2.min.css">
-    <script src="./js/sweetalert2.min.js" ></script>
-    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    <script src="./js/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        /* Estilo del cuerpo con un fondo sutil y moderno */
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
         body {
-            background: #f0f2f5; /* Gris muy claro para descanso visual */
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
             height: 100vh;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
         }
 
-        /* Contenedor de login con bordes suaves y sombra profunda */
-        .login-container {
-            background: #ffffff;
+        /* Fondo de partículas */
+        #particles-js {
+            position: absolute;
             width: 100%;
-            max-width: 420px;
-            padding: 50px 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
-            border-top: 5px solid #3f51b5; /* Línea de acento superior (Indigo) */
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            z-index: -1;
         }
 
-        /* Estilo para el icono superior */
-        .login-content i.fa-user-circle {
-            color: #3f51b5;
-            margin-bottom: 15px;
+        .login-card {
+            background: var(--glass);
+            width: 100%;
+            max-width: 450px;
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
             transition: transform 0.3s ease;
         }
 
-        /* Texto de bienvenida */
-        .welcome-text {
-            color: #444;
-            font-weight: 500;
-            font-size: 1.4rem;
+        .login-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .logo-circle i {
+            color: white;
+            font-size: 3rem;
+        }
+
+        .welcome-text h2 {
+            font-weight: 800;
+            color: #1e293b;
             margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .subtitle-text {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-        }
-
-        /* Mejora visual de los campos de texto */
         .form-group {
-            margin-bottom: 25px !important;
+            position: relative;
+            margin-bottom: 35px !important;
         }
 
         .form-control {
-            border-bottom: 2px solid #ddd !important;
+            border: none !important;
+            border-bottom: 2px solid #cbd5e1 !important;
+            background: transparent !important;
+            padding: 10px 5px !important;
+            font-size: 1.1rem !important;
+            color: #1e293b !important;
+            transition: all 0.3s ease !important;
         }
 
-        /* Botón personalizado con efecto de elevación */
-        .btn-custom-login {
-            background-color: #3f51b5 !important;
-            color: #fff !important;
+        .form-control:focus {
+            border-bottom-color: var(--primary) !important;
+            box-shadow: none !important;
+        }
+
+        /* Toggle Password Eye */
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            cursor: pointer;
+            color: #64748b;
+            z-index: 100;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
+            border: none !important;
+            color: white !important;
             width: 100%;
-            padding: 12px;
-            border-radius: 8px !important;
-            font-weight: 700;
-            text-transform: uppercase;
+            padding: 16px !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            font-size: 1.1rem !important;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
-            display: block;
-            text-decoration: none !important;
-            margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(63, 81, 181, 0.2);
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease !important;
         }
 
-        .btn-custom-login:hover {
-            background-color: #303f9f !important;
-            box-shadow: 0 6px 12px rgba(63, 81, 181, 0.3);
-            transform: translateY(-2px);
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
         }
 
-        /* Pie de página del login */
-        .login-footer {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #aaa;
+        .footer-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Animación de entrada */
+        .animate-in {
+            animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="login-content">
-            <p class="text-center">
-                <i class="fas fa-user-circle fa-5x"></i>
-            </p>
-            
-            <p class="text-center welcome-text">Bienvenido</p>
-            <p class="text-center subtitle-text">Ingresa tus credenciales para continuar</p>
-            
-            <form action="" autocomplete="off">
-                <div class="form-group">
-                    <label for="UserName" class="bmd-label-floating">
-                        <i class="fas fa-user"></i> &nbsp; Nombre de usuario
-                    </label>
-                    <input type="text" class="form-control" id="UserName" name="usuario" 
-                           pattern="[a-zA-Z0-9]{1,35}" maxlength="35" required>
-                </div>
+    <div id="particles-js"></div>
 
-                <div class="form-group">
-                    <label for="UserPassword" class="bmd-label-floating">
-                        <i class="fas fa-key"></i> &nbsp; Contraseña
-                    </label>
-                    <input type="password" class="form-control" id="UserPassword" name="clave" 
-                           maxlength="200" required>
-                </div>
-
-                <a href="home.html" class="btn btn-raised btn-custom-login text-center">
-                    Iniciar Sesión
-                </a>
-
-                <p class="text-center login-footer">
-                    &copy; 2026 Todos los derechos reservados.
-                </p>
-            </form>
+    <div class="login-card animate-in">
+        <div class="logo-circle">
+            <i class="fas fa-fingerprint"></i>
         </div>
+
+        <div class="welcome-text text-center">
+            <h2>Bienvenido</h2>
+            <p class="text-muted">Inicia sesión para gestionar tu negocio</p>
+        </div>
+
+        <form id="proLoginForm" autocomplete="off">
+            <div class="form-group">
+                <label for="UserName" class="bmd-label-floating">
+                    <i class="fas fa-user-circle"></i> &nbsp; Usuario Administrador
+                </label>
+                <input type="text" class="form-control" id="UserName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="UserPassword" class="bmd-label-floating">
+                    <i class="fas fa-shield-alt"></i> &nbsp; Contraseña Segura
+                </label>
+                <input type="password" class="form-control" id="UserPassword" required>
+                <span class="toggle-password" id="eyeIcon">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+
+            <button type="submit" class="btn btn-submit" id="loginBtn">
+                <span id="btnText">INGRESAR AHORA</span>
+                <span id="loader" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Validando...</span>
+            </button>
+
+            <div class="footer-links">
+                <span>¿Olvidaste tu clave? <a href="#">Click aquí</a></span>
+            </div>
+        </form>
     </div>
 
-    <script src="./js/jquery-3.4.1.min.js" ></script>
-    <script src="./js/popper.min.js" ></script>
-    <script src="./js/bootstrap.min.js" ></script>
-    <script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
-    <script src="./js/bootstrap-material-design.min.js" ></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <script>
-        $(document).ready(function() { 
-            // Inicializa los efectos de Material Design
-            $('body').bootstrapMaterialDesign(); 
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // 1. Configuración de Partículas
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 80 },
+                    "color": { "value": "#6366f1" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5 },
+                    "size": { "value": 3 },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#6366f1", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2 }
+                },
+                "interactivity": {
+                    "events": { "onhover": { "enable": true, "mode": "repulse" } }
+                }
+            });
+
+            // 2. Toggle Mostrar/Ocultar Contraseña
+            $('#eyeIcon').on('click', function() {
+                const input = $('#UserPassword');
+                const type = input.attr('type') === 'password' ? 'text' : 'password';
+                input.attr('type', type);
+                $(this).find('i').toggleClass('fa-eye fa-eye-slash');
+            });
+
+            // 3. Lógica de Autenticación
+            $('#proLoginForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const user = $('#UserName').val().trim();
+                const pass = $('#UserPassword').val().trim();
+                const btn = $('#loginBtn');
+
+                // Simulación de carga
+                $('#btnText').hide();
+                $('#loader').show();
+                btn.prop('disabled', true);
+
+                setTimeout(() => {
+                    if(user === "admin" && pass === "12345") {
+                        Swal.fire({
+                            title: '¡Acceso Concedido!',
+                            text: 'Verificando credenciales en el servidor...',
+                            icon: 'success',
+                            background: '#fff',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        }).then(() => {
+                            window.location.href = "home.html";
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error de Seguridad',
+                            text: 'El usuario o la clave no coinciden con nuestros registros.',
+                            icon: 'error',
+                            confirmButtonColor: '#6366f1'
+                        });
+                        $('#btnText').show();
+                        $('#loader').hide();
+                        btn.prop('disabled', false);
+                    }
+                }, 1500);
+            });
         });
     </script>
-    <script src="./js/main.js" ></script>
 </body>
 </html>
