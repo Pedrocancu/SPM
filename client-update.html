@@ -1,237 +1,265 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Actualizar cliente</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Actualizar cliente - Premium</title>
 
-	<!-- Normalize V8.0.1 -->
-	<link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+    <script src="./js/sweetalert2.min.js" ></script>
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="./css/style.css">
 
-	<!-- Bootstrap V4.3 -->
-	<link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-accent: #00b09b;
+            --secondary-accent: #96c93d;
+            --dark-bg: #1a1c20;
+            --card-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
 
-	<!-- Bootstrap Material Design V4.0 -->
-	<link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+        body {
+            background-color: #f0f2f5;
+        }
 
-	<!-- Font Awesome V5.9.0 -->
-	<link rel="stylesheet" href="./css/all.css">
+        /* Contenedor principal con profundidad */
+        .page-content {
+            background: #f8f9fa;
+        }
 
-	<!-- Sweet Alerts V8.13.0 CSS file -->
-	<link rel="stylesheet" href="./css/sweetalert2.min.css">
+        /* Encabezado con gradiente moderno */
+        .page-header {
+            background: linear-gradient(to right, #ffffff, #f1f3f5);
+            padding: 2.5rem;
+            border-radius: 0 0 20px 20px;
+            border-left: 6px solid var(--primary-accent);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
 
-	<!-- Sweet Alert V8.13.0 JS file-->
-	<script src="./js/sweetalert2.min.js" ></script>
+        /* Estilo de las pestañas de navegación */
+        .page-nav-tabs {
+            display: flex;
+            gap: 10px;
+            border: none;
+            margin-bottom: 25px;
+        }
 
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-	
-	<!-- General Styles -->
-	<link rel="stylesheet" href="./css/style.css">
+        .page-nav-tabs li a {
+            background: white;
+            border-radius: 12px !important;
+            padding: 12px 25px !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            color: #555 !important;
+            border: 1px solid transparent !important;
+        }
 
+        .page-nav-tabs li a:hover {
+            transform: translateY(-3px);
+            color: var(--primary-accent) !important;
+            border-color: var(--primary-accent) !important;
+        }
 
+        /* Formulario Estilo Card */
+        .form-neon {
+            background: white !important;
+            border-radius: 20px !important;
+            padding: 40px !important;
+            box-shadow: var(--card-shadow) !important;
+            border: none !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-neon::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: linear-gradient(to right, var(--primary-accent), var(--secondary-accent));
+        }
+
+        legend {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3436;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
+        }
+
+        /* Animación en los inputs */
+        .form-group.is-focused .bmd-label-floating {
+            color: var(--primary-accent) !important;
+        }
+
+        .form-control {
+            border-bottom: 2px solid #eee !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            background-image: linear-gradient(0deg, var(--primary-accent) 2px, rgba(0, 176, 155, 0) 0), 
+                              linear-gradient(0deg, #d2d2d2 1px, hsla(0, 0%, 82%, 0) 0) !important;
+        }
+
+        /* Botón de Actualización */
+        .btn-update-premium {
+            background: linear-gradient(135deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+            border: none;
+            border-radius: 50px !important;
+            padding: 15px 50px !important;
+            font-weight: 800;
+            color: white !important;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0, 176, 155, 0.2);
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+
+        .btn-update-premium:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 176, 155, 0.4);
+        }
+
+        .btn-update-premium i {
+            margin-right: 10px;
+            animation: rotate 2s infinite linear;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mejora del Nav Lateral para que combine */
+        .nav-lateral-content {
+            background-image: linear-gradient(180deg, #1a1c20 0%, #2d3436 100%);
+        }
+    </style>
 </head>
 <body>
-	
-	<!-- Main container -->
-	<main class="full-box main-container">
-		<!-- Nav lateral -->
-		<section class="full-box nav-lateral">
-			<div class="full-box nav-lateral-bg show-nav-lateral"></div>
-			<div class="full-box nav-lateral-content">
-				<figure class="full-box nav-lateral-avatar">
-					<i class="far fa-times-circle show-nav-lateral"></i>
-					<img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
-					<figcaption class="roboto-medium text-center">
-						Pedro Andres Cancu <br><small class="roboto-condensed-light">Web Developer</small>
-					</figcaption>
-				</figure>
-				<div class="full-box nav-lateral-bar"></div>
-				<nav class="full-box nav-lateral-menu">
-					<ul>
-						<li>
-							<a href="home.html"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Dashboard</a>
-						</li>
+    
+    <main class="full-box main-container">
+        <section class="full-box nav-lateral">
+            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
+            <div class="full-box nav-lateral-content">
+                <figure class="full-box nav-lateral-avatar">
+                    <i class="far fa-times-circle show-nav-lateral"></i>
+                    <img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
+                    <figcaption class="roboto-medium text-center">
+                        Pedro Andres Cancu <br><small class="roboto-condensed-light">Web Developer</small>
+                    </figcaption>
+                </figure>
+                <div class="full-box nav-lateral-bar"></div>
+                <nav class="full-box nav-lateral-menu">
+                    <ul>
+                        <li><a href="home.html"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Dashboard</a></li>
+                        <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas fa-users fa-fw"></i> &nbsp; Clientes <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="client-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Cliente</a></li>
+                                <li><a href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a></li>
+                                <li><a href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
 
-						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-users fa-fw"></i> &nbsp; Clientes <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="client-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Cliente</a>
-								</li>
-								<li>
-									<a href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a>
-								</li>
-								<li>
-									<a href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a>
-								</li>
-							</ul>
-						</li>
+        <section class="full-box page-content">
+            <nav class="full-box navbar-info">
+                <a href="#" class="float-left show-nav-lateral"><i class="fas fa-exchange-alt"></i></a>
+                <a href="user-update.html"><i class="fas fa-user-cog"></i></a>
+                <a href="#" class="btn-exit-system"><i class="fas fa-power-off"></i></a>
+            </nav>
 
-						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a>
-								</li>
-								<li>
-									<a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de items</a>
-								</li>
-								<li>
-									<a href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar item</a>
-								</li>
-							</ul>
-						</li>
+            <div class="full-box page-header">
+                <h3 class="text-left font-weight-bold" style="color: #2d3436;">
+                    <i class="fas fa-sync-alt fa-fw"></i> &nbsp; GESTIÓN DE CLIENTE
+                </h3>
+                <p class="text-justify text-muted">
+                    Panel de actualización de registros. Aquí puede modificar los datos sensibles del cliente. Los cambios se verán reflejados inmediatamente en todos los módulos de préstamo.
+                </p>
+            </div>
 
-						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Préstamos <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="reservation-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo préstamo</a>
-								</li>
-								<li>
-									<a href="reservation-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de préstamos</a>
-								</li>
-								<li>
-									<a href="reservation-search.html"><i class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar préstamos</a>
-								</li>
-								<li>
-									<a href="reservation-pending.html"><i class="fas fa-hand-holding-usd fa-fw"></i> &nbsp; Préstamos pendientes</a>
-								</li>
-							</ul>
-						</li>
-
-						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="user-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
-								</li>
-								<li>
-									<a href="user-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
-								</li>
-								<li>
-									<a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar usuario</a>
-								</li>
-							</ul>
-						</li>
-
-						<li>
-							<a href="company.html"><i class="fas fa-store-alt fa-fw"></i> &nbsp; Empresa</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</section>
-
-		<!-- Page content -->
-		<section class="full-box page-content">
-			<nav class="full-box navbar-info">
-				<a href="#" class="float-left show-nav-lateral">
-					<i class="fas fa-exchange-alt"></i>
-				</a>
-				<a href="user-update.html">
-					<i class="fas fa-user-cog"></i>
-				</a>
-				<a href="#" class="btn-exit-system">
-					<i class="fas fa-power-off"></i>
-				</a>
-			</nav>
-
-			<!-- Page header -->
-			<div class="full-box page-header">
-				<h3 class="text-left">
-					<i class="fas fa-sync-alt fa-fw"></i> &nbsp; ACTUALIZAR CLIENTE
-				</h3>
-				<p class="text-justify">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem odit amet asperiores quis minus, dolorem repellendus optio doloremque error a omnis soluta quae magnam dignissimos, ipsam, temporibus sequi, commodi accusantium!
-				</p>
-			</div>
-
-			<div class="container-fluid">
-				<ul class="full-box list-unstyled page-nav-tabs">
-					<li>
-						<a href="client-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE</a>
-					</li>
-					<li>
-						<a href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES</a>
-					</li>
-					<li>
-						<a href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE</a>
-					</li>
-				</ul>	
-			</div>
-			
-			<!-- Content here-->
-			<div class="container-fluid">
-				<form action="" class="form-neon" autocomplete="off">
-					<fieldset>
-						<legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-12 col-md-6">
-									<div class="form-group">
-										<label for="cliente_dni" class="bmd-label-floating">DNI</label>
-										<input type="text" pattern="[a-zA-Z0-9-]{1,27}" class="form-control" id="cliente_dni" id="cliente_dni" maxlength="27">
-									</div>
-								</div>
-								<div class="col-12 col-md-6">
-									<div class="form-group">
-										<label for="cliente_nombre" class="bmd-label-floating">Nombre</label>
-										<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_nombre" id="cliente_nombre" maxlength="40">
-									</div>
-								</div>
-								<div class="col-12 col-md-4">
-									<div class="form-group">
-										<label for="cliente_apellido" class="bmd-label-floating">Apellido</label>
-										<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_apellido" id="cliente_apellido" maxlength="40">
-									</div>
-								</div>
-								<div class="col-12 col-md-4">
-									<div class="form-group">
-										<label for="cliente_telefono" class="bmd-label-floating">Teléfono</label>
-										<input type="text" pattern="[0-9()+]{1,20}" class="form-control" name="cliente_telefono" id="cliente_telefono" maxlength="20">
-									</div>
-								</div>
-								<div class="col-12 col-md-4">
-									<div class="form-group">
-										<label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-										<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" class="form-control" name="cliente_direccion" id="cliente_direccion" maxlength="150">
-									</div>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-					<br><br><br>
-					<p class="text-center" style="margin-top: 40px;">
-						<button type="submit" class="btn btn-raised btn-success btn-sm"><i class="fas fa-sync-alt"></i> &nbsp; ACTUALIZAR</button>
-					</p>
-				</form>
-			</div>	
-
-		</section>
-	</main>
-	
-	
-	<!--=============================================
-	=            Include JavaScript files           =
-	==============================================-->
-	<!-- jQuery V3.4.1 -->
-	<script src="./js/jquery-3.4.1.min.js" ></script>
-
-	<!-- popper -->
-	<script src="./js/popper.min.js" ></script>
-
-	<!-- Bootstrap V4.3 -->
-	<script src="./js/bootstrap.min.js" ></script>
-
-	<!-- jQuery Custom Content Scroller V3.1.5 -->
-	<script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
-
-	<!-- Bootstrap Material Design V4.0 -->
-	<script src="./js/bootstrap-material-design.min.js" ></script>
-	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-
-	<script src="./js/main.js" ></script>
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li><a href="client-new.html"><i class="fas fa-plus fa-fw"></i> AGREGAR</a></li>
+                    <li><a href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> LISTADO</a></li>
+                    <li><a href="client-search.html"><i class="fas fa-search fa-fw"></i> BUSQUEDA</a></li>
+                </ul>   
+            </div>
+            
+            <div class="container-fluid">
+                <form action="" class="form-neon" autocomplete="off">
+                    <fieldset>
+                        <legend><i class="fas fa-user-edit text-info"></i> &nbsp; Información del Perfil</legend>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="cliente_dni" class="bmd-label-floating">DNI / Cédula</label>
+                                        <input type="text" pattern="[a-zA-Z0-9-]{1,27}" class="form-control" name="cliente_dni" id="cliente_dni" maxlength="27">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="cliente_nombre" class="bmd-label-floating">Nombre</label>
+                                        <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_nombre" id="cliente_nombre" maxlength="40">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label for="cliente_apellido" class="bmd-label-floating">Apellido</label>
+                                        <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_apellido" id="cliente_apellido" maxlength="40">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label for="cliente_telefono" class="bmd-label-floating">Teléfono</label>
+                                        <input type="tel" pattern="[0-9()+]{1,20}" class="form-control" name="cliente_telefono" id="cliente_telefono" maxlength="20">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label for="cliente_direccion" class="bmd-label-floating">Dirección Exacta</label>
+                                        <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" class="form-control" name="cliente_direccion" id="cliente_direccion" maxlength="150">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <div class="text-center" style="margin-top: 50px;">
+                        <button type="submit" class="btn btn-update-premium">
+                            <i class="fas fa-sync-alt"></i> ACTUALIZAR DATOS DEL CLIENTE
+                        </button>
+                    </div>
+                </form>
+            </div>  
+        </section>
+    </main>
+    
+    <script src="./js/jquery-3.4.1.min.js" ></script>
+    <script src="./js/popper.min.js" ></script>
+    <script src="./js/bootstrap.min.js" ></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
+    <script src="./js/bootstrap-material-design.min.js" ></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script src="./js/main.js" ></script>
 </body>
 </html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de Encuesta - Admin Pro</title>
+
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --primary: #4e73df;
+            --success: #1cc88a;
+            --info: #36b9cc;
+            --warning: #f6c23e;
+            --bg-light: #f8f9fc;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .stat-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            background: white;
+            border-left: 5px solid;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .border-primary { border-left-color: var(--primary) !important; }
+        .border-success { border-left-color: var(--success) !important; }
+        .border-info { border-left-color: var(--info) !important; }
+        .border-warning { border-left-color: var(--warning) !important; }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .page-header-modern {
+            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+        }
+
+        .icon-circle {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f3f9;
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="full-box main-container">
+        <section class="full-box page-content">
+            
+            <div class="page-header-modern shadow">
+                <div class="container-fluid">
+                    <h2 class="text-white font-weight-bold">
+                        <i class="fas fa-chart-line"></i> Análisis de Encuestas
+                    </h2>
+                    <p class="mb-0 text-white-50">Resumen estadístico de satisfacción y rendimiento de items.</p>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card border-primary h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Encuestas</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">1,250</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon-circle"><i class="fas fa-clipboard-list fa-2x"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card border-success h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Satisfacción</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">94.2%</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon-circle text-success"><i class="fas fa-smile fa-2x"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card border-info h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Nuevos Items</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">48</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon-circle text-info"><i class="fas fa-box-open fa-2x"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card border-warning h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pendientes</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon-circle text-warning"><i class="fas fa-exclamation-triangle fa-2x"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <h6 class="font-weight-bold text-primary mb-4">Tendencia de Préstamos (Mensual)</h6>
+                            <canvas id="mainChart" height="150"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="chart-container">
+                            <h6 class="font-weight-bold text-primary mb-4">Estado de Items</h6>
+                            <canvas id="pieChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pb-5">
+                    <button class="btn btn-raised btn-primary btn-lg shadow" onclick="window.print()">
+                        <i class="fas fa-file-pdf"></i> &nbsp; GENERAR REPORTE PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Gráfico de Líneas
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Préstamos',
+                    data: [65, 80, 72, 95, 110, 130],
+                    borderColor: '#4e73df',
+                    backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Gráfico de Pastel
+        const ctx2 = document.getElementById('pieChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Habilitados', 'En Uso', 'Mantenimiento'],
+                datasets: [{
+                    data: [70, 20, 10],
+                    backgroundColor: ['#1cc88a', '#4e73df', '#f6c23e'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                cutout: '70%',
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+</body>
+</html>
