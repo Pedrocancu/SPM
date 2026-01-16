@@ -3,258 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Pro | Dashboard</title>
+    <title>Nexus Banking Intelligence | 2026</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/all.css">
     <link rel="stylesheet" href="./css/sweetalert2.min.css">
-    <link rel="stylesheet" href="./css/style.css">
 
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --primary: #6366f1;
-            --secondary: #64748b;
-            --accent: #06b6d4;
-            --text-main: #1e293b;
+            --bank-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --accent-glow: rgba(0, 82, 255, 0.15);
+            --success-glow: rgba(16, 185, 129, 0.15);
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
         body {
-            background: radial-gradient(at 0% 0%, #f1f5f9 0, transparent 50%), 
-                        radial-gradient(at 50% 0%, #e0e7ff 0, transparent 50%);
-            background-color: #f8fafc;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-main);
+            background-color: #f8fafc;
+            color: #1e293b;
         }
 
-        /* Sidebar Modernizado */
+        /* BARRA LATERAL ULTRA-MODERNA */
         .nav-lateral {
-            background-color: #0f172a !important;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.05);
+            background: var(--bank-gradient) !important;
+            border-right: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Contenedor Principal */
-        .page-content {
-            padding: 30px !important;
-        }
-
-        /* Navbar Flotante */
-        .navbar-info {
-            background: var(--glass-bg) !important;
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            margin-bottom: 30px;
-            padding: 12px 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-
-        /* Banner de Bienvenida */
-        .welcome-card {
-            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
-            border-radius: 24px;
-            padding: 40px;
-            color: white;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
-        }
-
-        .welcome-card h2 { font-weight: 800; letter-spacing: -1px; }
-
-        /* Tiles Estilo Dashboard 2026 */
-        .tile-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .modern-tile {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid #f1f5f9;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none !important;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .modern-tile:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-            border-color: var(--primary);
-        }
-
-        .tile-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .tile-icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-        }
-
-        .tile-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin: 0;
-        }
-
-        .tile-label {
-            color: #64748b;
-            font-weight: 600;
+        .nav-lateral-menu ul li a {
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.3px;
+            padding: 15px 25px;
+            border-left: 4px solid transparent;
+            transition: 0.3s;
         }
 
-        /* Colores de Categorías */
-        .c-blue { background: #e0e7ff; color: #4338ca; }
-        .c-green { background: #dcfce7; color: #15803d; }
-        .c-orange { background: #ffedd5; color: #c2410c; }
-        .c-purple { background: #f3e8ff; color: #7e22ce; }
+        .nav-lateral-menu ul li a:hover {
+            background: var(--accent-glow);
+            border-left: 4px solid #0052ff;
+            color: #fff !important;
+        }
 
-        /* Widget de Actividad */
-        .activity-feed {
-            background: white;
+        /* HEADER DE SECCIÓN */
+        .section-title {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #0f172a;
+            margin-bottom: 5px;
+        }
+
+        /* TARJETAS DE DATOS (GLASS-MORPHISM) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 24px;
-            padding: 30px;
-            border: 1px solid #f1f5f9;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: 0.3s ease;
         }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: #fff;
+        }
+
+        /* WIDGET DE MONITOR DE BÓVEDA */
+        .vault-monitor {
+            background: #0f172a;
+            color: #38bdf8;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #1e293b;
+        }
+
+        .vault-status-dot {
+            height: 10px; width: 10px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        /* TABLA DE TRANSACCIONES RECIENTES */
+        .table-modern {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .table-modern tr {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            border-radius: 12px;
+        }
+
+        .table-modern td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+
+        .table-modern td:first-child { border-radius: 12px 0 0 12px; }
+        .table-modern td:last-child { border-radius: 0 12px 12px 0; }
+
+        .status-pill {
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-completed { background: #dcfce7; color: #15803d; }
+        .status-pending { background: #fef9c3; color: #854d0e; }
+
     </style>
 </head>
 <body>
 
     <main class="full-box main-container">
         <section class="full-box nav-lateral">
-            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
-            <div class="full-box nav-lateral-content">
-                <figure class="full-box nav-lateral-avatar">
-                    <i class="far fa-times-circle show-nav-lateral"></i>
-                    <img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
-                    <figcaption class="roboto-medium text-center">
-                        Pedro Andrés Cancu <br>
-                        <span class="badge badge-primary">Super Admin</span>
-                    </figcaption>
-                </figure>
-                <nav class="full-box nav-lateral-menu">
+            <div class="nav-lateral-content">
+                <div class="text-center p-4">
+                    <img src="./assets/avatar/Avatar.png" class="rounded-circle mb-3" style="width: 80px; border: 3px solid #0052ff;">
+                    <h6 class="text-white font-weight-bold mb-0">Unidad de Riesgos</h6>
+                    <small class="text-muted">Sistema Nexus v4.2</small>
+                </div>
+                
+                <nav class="nav-lateral-menu">
                     <ul>
-                        <li><a href="home.html" class="active"><i class="fas fa-home-alt fa-fw"></i> &nbsp; Dashboard</a></li>
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-microscope fa-fw"></i> &nbsp; Salud UAPA <i class="fas fa-chevron-right float-right" style="font-size: 0.7rem; margin-top: 5px;"></i></a>
-                            <ul>
-                                <li><a href="encuesta-new.html"><i class="fas fa-plus"></i> Nueva Encuesta</a></li>
-                                <li><a href="encuesta-stats.html"><i class="fas fa-chart-line"></i> Estadísticas</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="company.html"><i class="fas fa-building fa-fw"></i> &nbsp; Empresa</a></li>
+                        <li class="px-4 mt-3 mb-2 text-muted small font-weight-bold">OPERACIONES</li>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Vista Ejecutiva</a></li>
+                        <li><a href="#"><i class="fas fa-university"></i> Gestión de Cajas</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Cámara de Compensación</a></li>
+                        
+                        <li class="px-4 mt-3 mb-2 text-muted small font-weight-bold">CRÉDITOS & BI</li>
+                        <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Cartera de Préstamos</a></li>
+                        <li><a href="#"><i class="fas fa-user-shield"></i> Cumplimiento / AML</a></li>
+                        
+                        <li class="px-4 mt-3 mb-2 text-muted small font-weight-bold">TALENTO HUMANO</li>
+                        <li><a href="#"><i class="fas fa-heartbeat"></i> Salud Laboral (UAPA)</a></li>
+                        <li><a href="#"><i class="fas fa-cog"></i> Ajustes</a></li>
                     </ul>
                 </nav>
             </div>
         </section>
 
         <section class="full-box page-content">
-            <nav class="full-box navbar-info">
-                <a href="#" class="float-left show-nav-lateral"><i class="fas fa-align-left"></i></a>
-                <div class="float-right d-flex align-items-center">
-                    <div class="mr-4 d-none d-md-block">
-                        <small class="text-muted d-block">Servidor</small>
-                        <span class="text-success" style="font-size: 0.8rem;"><i class="fas fa-circle" style="font-size: 0.5rem;"></i> Operativo</span>
-                    </div>
-                    <a href="user-update.html" class="mx-2"><i class="fas fa-user-shield"></i></a>
-                    <a href="#" class="btn-exit-system mx-2"><i class="fas fa-sign-out-alt text-danger"></i></a>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="section-title">Panel de Control Financiero</h1>
+                    <p class="text-muted small">Bienvenido, Pedro. Aquí tienes el resumen de la institución para hoy.</p>
                 </div>
-            </nav>
-
-            <div class="welcome-card">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <h2>Hola de nuevo, Pedro 👋</h2>
-                        <p class="opacity-75">El sistema ha procesado 15 nuevas encuestas de salud desde tu última conexión. Revisa los KPI actualizados a continuación.</p>
-                        <button class="btn btn-light mt-3" style="border-radius: 12px; font-weight: 700;">Generar Reporte PDF</button>
+                <div class="d-flex gap-3 align-items-center">
+                    <div class="vault-monitor mr-3 d-none d-xl-block">
+                        <small class="d-block opacity-50">ESTADO BÓVEDA</small>
+                        <span class="vault-status-dot mr-2"></span> <strong>EN LÍNEA / CERRADA</strong>
                     </div>
+                    <button class="btn btn-primary px-4 py-2" style="border-radius: 12px; font-weight: 600;">
+                        <i class="fas fa-plus-circle mr-2"></i> Nuevo Crédito
+                    </button>
                 </div>
             </div>
 
-            <div class="tile-grid">
-                
-                <a href="client-list.html" class="modern-tile">
-                    <div class="tile-head">
-                        <span class="tile-label">Clientes</span>
-                        <div class="tile-icon-box c-blue"><i class="fas fa-user-friends"></i></div>
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="glass-card" style="border-bottom: 4px solid #0052ff;">
+                        <small class="text-muted font-weight-bold">CAPTACIONES TOTALES</small>
+                        <h2 class="font-weight-bold mt-2">$42.8M</h2>
+                        <span class="text-success small"><i class="fas fa-level-up-alt"></i> +2.4%</span>
                     </div>
-                    <h3 class="tile-number">1,205</h3>
-                    <small class="text-success"><i class="fas fa-arrow-up"></i> +12% este mes</small>
-                </a>
-
-                <a href="encuesta-stats.html" class="modern-tile">
-                    <div class="tile-head">
-                        <span class="tile-label">Salud UAPA</span>
-                        <div class="tile-icon-box c-purple"><i class="fas fa-notes-medical"></i></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card" style="border-bottom: 4px solid #10b981;">
+                        <small class="text-muted font-weight-bold">DESEMBOLSOS MES</small>
+                        <h2 class="font-weight-bold mt-2">$12.1M</h2>
+                        <span class="text-success small"><i class="fas fa-check"></i> Meta: 85%</span>
                     </div>
-                    <h3 class="tile-number">32</h3>
-                    <small class="text-muted">Pendientes: 4</small>
-                </a>
-
-                <a href="reservation-list.html" class="modern-tile">
-                    <div class="tile-head">
-                        <span class="tile-label">Préstamos</span>
-                        <div class="tile-icon-box c-orange"><i class="fas fa-hand-holding-usd"></i></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card" style="border-bottom: 4px solid #f59e0b;">
+                        <small class="text-muted font-weight-bold">MORA DE CARTERA</small>
+                        <h2 class="font-weight-bold mt-2">1.85%</h2>
+                        <span class="text-danger small"><i class="fas fa-exclamation"></i> Riesgo Bajo</span>
                     </div>
-                    <h3 class="tile-number">RD$ 150k</h3>
-                    <small class="text-danger"><i class="fas fa-clock"></i> 3 vencidos</small>
-                </a>
-
-                <a href="user-list.html" class="modern-tile">
-                    <div class="tile-head">
-                        <span class="tile-label">Usuarios</span>
-                        <div class="tile-icon-box c-green"><i class="fas fa-user-lock"></i></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card" style="border-bottom: 4px solid #7c3aed;">
+                        <small class="text-muted font-weight-bold">SALUD DEL PERSONAL</small>
+                        <h2 class="font-weight-bold mt-2">94%</h2>
+                        <span class="text-primary small">Reporte UAPA</span>
                     </div>
-                    <h3 class="tile-number">50</h3>
-                    <small class="text-muted">Activos ahora: 8</small>
-                </a>
-
+                </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-8 mb-4">
-                    <div class="activity-feed">
-                        <h5 class="mb-4 font-weight-bold">Actividad de la Investigación</h5>
+                <div class="col-lg-8">
+                    <div class="glass-card mb-4">
+                        <h5 class="font-weight-bold mb-4">Tendencia de Activos vs Pasivos</h5>
                         
-                        <div class="p-5 text-center border-dashed" style="border: 2px dashed #e2e8f0; border-radius: 15px;">
-                            <p class="text-muted m-0">Gráfico dinámico de encuestas diarias (Integrar con Chart.js)</p>
+                        <div class="py-5 text-center text-muted">
+                            <i class="fas fa-chart-line fa-3x opacity-25"></i>
+                            <p class="mt-3">Visualización de crecimiento institucional activada.</p>
                         </div>
                     </div>
+
+                    <h5 class="font-weight-bold mb-3 mt-4">Últimas Solicitudes de Préstamo</h5>
+                    <table class="table-modern">
+                        <thead>
+                            <tr class="text-muted small font-weight-bold">
+                                <td>CLIENTE</td>
+                                <td>MONTO</td>
+                                <td>TIPO</td>
+                                <td>ESTADO</td>
+                                <td>ACCIÓN</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Ana María Rosario</strong><br><small>ID: 402-XXXX-1</small></td>
+                                <td>RD$ 450,000</td>
+                                <td>Hipotecario</td>
+                                <td><span class="status-pill status-completed">Aprobado</span></td>
+                                <td><button class="btn btn-light btn-sm"><i class="fas fa-eye"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Carlos Manuel Tejeda</strong><br><small>ID: 001-XXXX-5</small></td>
+                                <td>RD$ 85,000</td>
+                                <td>Personal</td>
+                                <td><span class="status-pill status-pending">En Revisión</span></td>
+                                <td><button class="btn btn-light btn-sm"><i class="fas fa-eye"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="activity-feed h-100">
-                        <h5 class="mb-4 font-weight-bold">Notificaciones</h5>
-                        <ul class="list-unstyled">
-                            <li class="mb-3 d-flex">
-                                <div class="c-blue rounded-circle p-2 mr-3" style="height: fit-content;"><i class="fas fa-bell"></i></div>
-                                <div><small class="d-block font-weight-bold">Nuevo Cliente</small><small class="text-muted">Hace 5 min</small></div>
-                            </li>
-                            <li class="mb-3 d-flex">
-                                <div class="c-orange rounded-circle p-2 mr-3" style="height: fit-content;"><i class="fas fa-exclamation-triangle"></i></div>
-                                <div><small class="d-block font-weight-bold">Préstamo Vencido</small><small class="text-muted">Hace 2 horas</small></div>
-                            </li>
-                        </ul>
+
+                <div class="col-lg-4">
+                    <div class="glass-card h-100">
+                        <h5 class="font-weight-bold mb-4">Alertas de Auditoría</h5>
+                        <div class="alert alert-light border-0 mb-3" style="background: #fdf2f2;">
+                            <h6 class="font-weight-bold text-danger mb-1" style="font-size: 0.8rem;">REPORTE AML REQUERIDO</h6>
+                            <small class="text-muted">Transacción de $500,000 sin justificación en Caja 04.</small>
+                        </div>
+                        <div class="alert alert-light border-0 mb-3" style="background: #f0fdf4;">
+                            <h6 class="font-weight-bold text-success mb-1" style="font-size: 0.8rem;">INVESTIGACIÓN UAPA</h6>
+                            <small class="text-muted">Nueva encuesta de salud laboral disponible para gerentes.</small>
+                        </div>
+                        
+                        <hr>
+                        <h5 class="font-weight-bold mb-3">Resumen Salud Personal</h5>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="mr-3" style="width: 50px;">
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <small class="font-weight-bold">Personal Vacunado (75%)</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -262,22 +269,20 @@
     </main>
 
     <script src="./js/jquery-3.4.1.min.js"></script>
-    <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
     <script>
-        $(document).ready(function() { 
-            $('body').bootstrapMaterialDesign(); 
-            // Tooltip de bienvenida
-            Swal.fire({
-                title: 'Panel Actualizado',
-                text: 'Se han cargado los últimos datos de la investigación UAPA.',
-                icon: 'info',
-                timer: 2000,
-                showConfirmButton: false,
+        $(document).ready(function() {
+            // Notificación elegante al iniciar
+            const Toast = Swal.mixin({
                 toast: true,
-                position: 'top-end'
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'info',
+                title: 'Conexión Segura: Bóveda y Auditoría Sincronizados'
             });
         });
     </script>
