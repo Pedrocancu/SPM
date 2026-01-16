@@ -2,283 +2,314 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Datos de la empresa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración Maestra | Nexus POS</title>
 
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
     <link rel="stylesheet" href="./css/all.css">
     <link rel="stylesheet" href="./css/sweetalert2.min.css">
     <script src="./js/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="./css/style.css">
 
     <style>
         :root {
-            --primary-modern: #4361ee;
-            --secondary-modern: #4895ef;
-            --bg-light: #f8f9fc;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            --border-radius-lg: 12px;
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #06d6a0;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
         }
 
         body {
-            background-color: var(--bg-light);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f1f5f9;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--dark);
         }
 
-        /* Mejora del contenedor principal */
-        .page-content {
-            padding: 20px;
+        /* Layout Principal */
+        .main-wrapper {
+            display: flex;
+            min-height: 100vh;
         }
 
-        /* Tarjetas estilo Moderno (Sustituye el look del form-neon) */
-        .form-modern-card {
-            background: #ffffff;
-            border: none;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--card-shadow);
-            padding: 40px;
-            margin-bottom: 40px;
-            transition: transform 0.3s ease;
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .form-modern-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Títulos de sección */
-        legend {
-            font-weight: 700;
-            color: #2b2d42;
-            font-size: 1.25rem;
-            border-bottom: 2px solid #f1f3f9;
-            padding-bottom: 15px;
+        /* Cabecera Dinámica */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        /* Secciones de Configuración (Bento Grid) */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .config-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .config-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
             display: flex;
             align-items: center;
-        }
-
-        legend i {
-            margin-right: 12px;
-            color: var(--primary-modern);
-        }
-
-        /* Inputs mejorados */
-        .form-group {
             margin-bottom: 25px;
+            border-bottom: 1px solid var(--light);
+            padding-bottom: 15px;
         }
 
-        .form-control {
-            border-radius: 6px;
-            padding-left: 10px;
-        }
-
-        /* Botones con estilo moderno */
-        .btn {
-            border-radius: 8px !important;
-            padding: 10px 24px !important;
-            font-weight: 600 !important;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease !important;
-        }
-
-        .btn-info {
-            background-color: var(--primary-modern) !important;
-            box-shadow: 0 4px 14px rgba(67, 97, 238, 0.3) !important;
-        }
-
-        .btn-success {
-            background-color: #2ec4b6 !important;
-            box-shadow: 0 4px 14px rgba(46, 196, 182, 0.3) !important;
-        }
-
-        /* Cabecera de página limpia */
-        .page-header {
-            margin-bottom: 30px;
-            padding: 20px 0;
-        }
-
-        .page-header h3 {
-            font-weight: 800;
-            color: #1a1c2c;
-            letter-spacing: -0.5px;
-        }
-
-        /* Navbar superior estilizada */
-        .navbar-info {
-            background: #ffffff !important;
-            box-shadow: var(--card-shadow) !important;
+        .card-header i {
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 10px;
-            margin-bottom: 20px;
-            padding: 10px 20px;
+            margin-right: 15px;
         }
 
-        /* Badge de información */
-        .info-pill {
-            background: #eef2ff;
-            color: var(--primary-modern);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-modern);
-            margin-bottom: 30px;
+        /* Zona de Carga de Logo */
+        .logo-upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .logo-upload-zone:hover {
+            border-color: var(--primary);
+            background: #f0f7ff;
+        }
+
+        #logo-preview {
+            max-height: 120px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        /* Inputs Estilizados */
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .form-control-modern {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--light);
+            transition: 0.3s;
+        }
+
+        .form-control-modern:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+        }
+
+        /* Botón Flotante de Guardado */
+        .save-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .btn-save-all {
+            background: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(67, 97, 238, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-save-all:hover {
+            transform: scale(1.05);
+            background: var(--secondary);
         }
     </style>
 </head>
-
 <body>
-    <main class="full-box main-container">
-        <section class="full-box nav-lateral">
-            <div class="full-box nav-lateral-bg show-nav-lateral"></div>
-            <div class="full-box nav-lateral-content">
-                <figure class="full-box nav-lateral-avatar">
-                    <i class="far fa-times-circle show-nav-lateral"></i>
-                    <img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
-                    <figcaption class="roboto-medium text-center">
-                        Pedro Andres Cancu <br><small class="roboto-condensed-light">Web Developer</small>
-                    </figcaption>
-                </figure>
-                <div class="full-box nav-lateral-bar"></div>
-                <nav class="full-box nav-lateral-menu">
-                    <ul>
-                        <li><a href="home.html"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Dashboard</a></li>
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-users fa-fw"></i> &nbsp; Clientes <i class="fas fa-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="client-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Cliente</a></li>
-                                <li><a href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de clientes</a></li>
-                                <li><a href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a></li>
-                                <li><a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de items</a></li>
-                                <li><a href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar item</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="company.html"><i class="fas fa-store-alt fa-fw"></i> &nbsp; Empresa</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </section>
 
-        <section class="full-box page-content">
-            <nav class="full-box navbar-info">
-                <a href="#" class="float-left show-nav-lateral"><i class="fas fa-exchange-alt"></i></a>
-                <a href="user-update.html"><i class="fas fa-user-cog"></i></a>
-                <a href="#" class="btn-exit-system"><i class="fas fa-power-off"></i></a>
-            </nav>
-
-            <div class="full-box page-header">
-                <h3 class="text-left">
-                    <i class="fas fa-building fa-fw"></i> &nbsp; GESTIÓN DE EMPRESA
-                </h3>
-                <div class="info-pill">
-                    <i class="fas fa-info-circle"></i> &nbsp; 
-                    Administre los datos legales y de contacto de su organización. Estos datos aparecerán en los comprobantes y reportes del sistema.
+    <div class="main-wrapper">
+        <div class="content-area">
+            
+            <header class="page-header">
+                <div class="header-title">
+                    <h1><i class="fas fa-cog fa-spin"></i> Configuración Global del Sistema</h1>
+                    <small class="text-muted">Última actualización: Hoy a las 10:45 AM</small>
                 </div>
-            </div>
+                <div class="header-actions">
+                    <span class="badge badge-pill badge-success p-2">Sincronizado con la Nube</span>
+                </div>
+            </header>
 
-            <div class="container-fluid">
-                <div class="form-modern-card">
-                    <form action="" autocomplete="off">
-                        <fieldset>
-                            <legend><i class="far fa-plus-square"></i> Registro de Nueva Empresa</legend>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="empresa_nombre" class="bmd-label-floating">Nombre Comercial</label>
-                                            <input type="text" pattern="[a-zA-z0-99áéíóúÁÉÍÓÚñÑ ]{1,70}" class="form-control" name="empresa_nombre" id="empresa_nombre" maxlength="70">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="empresa_email" class="bmd-label-floating">Correo Electrónico</label>
-                                            <input type="email" class="form-control" name="empresa_email" id="empresa_email" maxlength="70">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="empresa_telefono" class="bmd-label-floating">Teléfono de Contacto</label>
-                                            <input type="text" pattern="[0-9()+]{1,20}" class="form-control" name="empresa_telefono" id="empresa_telefono" maxlength="20">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="empresa_direccion" class="bmd-label-floating">Dirección Física</label>
-                                            <input type="text" pattern="[a-zA-z0-99áéíóúÁÉÍÓÚñÑ ]{1,190}" class="form-control" name="empresa_direccion" id="empresa_direccion" maxlength="190">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <div class="text-center" style="margin-top: 20px;">
-                            <button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
-                            &nbsp; &nbsp;
-                            <button type="submit" class="btn btn-raised btn-info"><i class="far fa-save"></i> &nbsp; GUARDAR EMPRESA</button>
+            <form id="masterConfigForm">
+                <div class="settings-grid">
+                    
+                    <div class="config-card">
+                        <div class="card-header">
+                            <i class="fas fa-palette"></i>
+                            <h5 class="m-0 font-weight-bold">Identidad Visual</h5>
                         </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="container-fluid">
-                <div class="form-modern-card" style="border-top: 4px solid #2ec4b6;">
-                    <form action="" autocomplete="off">
-                        <fieldset>
-                            <legend><i class="fas fa-sync-alt"></i> Actualizar Información Existente</legend>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="upd_nombre" class="bmd-label-floating">Nombre de la empresa</label>
-                                            <input type="text" class="form-control" name="empresa_nombre" id="upd_nombre">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="upd_email" class="bmd-label-floating">Correo</label>
-                                            <input type="email" class="form-control" name="empresa_email" id="upd_email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="upd_tel" class="bmd-label-floating">Teléfono</label>
-                                            <input type="text" class="form-control" name="empresa_telefono" id="upd_tel">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="upd_dir" class="bmd-label-floating">Dirección</label>
-                                            <input type="text" class="form-control" name="empresa_direccion" id="upd_dir">
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="logo-upload-zone" onclick="document.getElementById('logo-input').click()">
+                            <input type="file" id="logo-input" hidden accept="image/*" onchange="previewImage(event)">
+                            <img id="logo-preview" src="#" alt="Vista previa">
+                            <div id="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt fa-2x mb-2 text-primary"></i>
+                                <p class="mb-0">Click para subir Logotipo</p>
+                                <small class="text-muted">PNG o JPG (Max. 2MB)</small>
                             </div>
-                        </fieldset>
-                        <p class="text-center" style="margin-top: 20px;">
-                            <button type="submit" class="btn btn-raised btn-success"><i class="fas fa-sync-alt"></i> &nbsp; APLICAR CAMBIOS</button>
-                        </p>
-                    </form>
+                        </div>
+                        <div class="mt-4">
+                            <label class="form-label">Eslogan de la Empresa</label>
+                            <input type="text" class="form-control-modern" placeholder="Ej: Calidad que nos distingue">
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <div class="card-header">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <h5 class="m-0 font-weight-bold">Configuración Fiscal</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nombre Legal</label>
+                                <input type="text" class="form-control-modern" value="Comercial Nexus S.R.L">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">RNC / NIT</label>
+                                <input type="text" class="form-control-modern" value="131-45678-9">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Impuesto (ITBIS/IVA %)</label>
+                                <input type="number" class="form-control-modern" value="18">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Moneda Sistema</label>
+                                <select class="form-control-modern">
+                                    <option>USD ($)</option>
+                                    <option>DOP (RD$)</option>
+                                    <option>MXN ($)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <div class="card-header">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <h5 class="m-0 font-weight-bold">Contacto y Soporte</h5>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono Central</label>
+                            <input type="tel" class="form-control-modern" placeholder="+1 (809) 000-0000">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sitio Web</label>
+                            <input type="url" class="form-control-modern" placeholder="https://tuempresa.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dirección Completa</label>
+                            <textarea class="form-control-modern" rows="2"></textarea>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        </section>
-    </main>
+
+                <div class="save-bar">
+                    <button type="submit" class="btn-save-all">
+                        <i class="fas fa-check-circle"></i> GUARDAR TODOS LOS CAMBIOS
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="./js/jquery-3.4.1.min.js"></script>
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="./js/bootstrap-material-design.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('body').bootstrapMaterialDesign();
+        // Función para previsualizar el Logo
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function(){
+                const output = document.getElementById('logo-preview');
+                const placeholder = document.getElementById('upload-placeholder');
+                output.src = reader.result;
+                output.style.display = 'inline-block';
+                placeholder.style.display = 'none';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Simulación de guardado masivo
+        $('#masterConfigForm').on('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Guardar configuración?',
+                text: "Estos cambios se reflejarán en todos los puntos de venta y facturas",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4361ee',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'Sí, aplicar todo',
+                cancelButtonText: 'Revisar'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        title: 'Sincronizando...',
+                        html: 'Actualizando base de datos global',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        onBeforeOpen: () => { Swal.showLoading(); }
+                    }).then(() => {
+                        Swal.fire('¡Éxito!', 'La configuración se ha aplicado correctamente.', 'success');
+                    });
+                }
+            });
         });
     </script>
-    <script src="./js/main.js"></script>
 </body>
 </html>
